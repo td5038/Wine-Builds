@@ -1,8 +1,8 @@
-From 640d805c602ddbf7dbe3b87f9cb617a83d913d3e Mon Sep 17 00:00:00 2001
+From 0034a34c1b7f8ef4cbf404b89682bce9d29e0355 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 21 Apr 2026 23:10:08 -0500
-Subject: [PATCH 31/55] winewayland: Implement edid emulation.
+Subject: [PATCH 31/65] winewayland: Implement edid emulation.
 
 ---
  dlls/winewayland.drv/display.c | 61 ++++++++++++++++++++++++++++++++++

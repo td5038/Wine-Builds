@@ -1,8 +1,8 @@
-From 886b78f5642ba2a49eecf8c156b1b7add32797a1 Mon Sep 17 00:00:00 2001
+From 750c9136f53ad106c3e2c2e78b25fc6035d7a1d6 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 22 Apr 2026 18:59:27 -0500
-Subject: [PATCH 33/55] winewayland: Implement support for color mangement
+Subject: [PATCH 33/65] winewayland: Implement support for color mangement
  protocol.
 
 ---
@@ -16,7 +16,7 @@ Subject: [PATCH 33/55] winewayland: Implement support for color mangement
  create mode 100644 dlls/winewayland.drv/color-management-v1.xml
 
 diff --git a/dlls/winewayland.drv/Makefile.in b/dlls/winewayland.drv/Makefile.in
-index 31938badb9f..7a39531d30f 100644
+index 244b464b941..13a964cca0d 100644
 --- a/dlls/winewayland.drv/Makefile.in
 +++ b/dlls/winewayland.drv/Makefile.in
 @@ -7,6 +7,7 @@ IMPORTS = user32 win32u
@@ -1870,7 +1870,7 @@ index b73464151f3..5a09e34d811 100644
      TRACE("name=%s rc_monitor=rc_work=%s\n",
            output_info->output->name, wine_dbgstr_rect(&monitor.rc_monitor));
 diff --git a/dlls/winewayland.drv/wayland.c b/dlls/winewayland.drv/wayland.c
-index ee7a4b4c309..063b3685414 100644
+index 3a8dad04f50..dfb209b1b72 100644
 --- a/dlls/winewayland.drv/wayland.c
 +++ b/dlls/winewayland.drv/wayland.c
 @@ -40,7 +40,10 @@ struct wayland process_wayland =
@@ -1885,7 +1885,7 @@ index ee7a4b4c309..063b3685414 100644
  };
  
  /**********************************************************************
-@@ -246,6 +249,12 @@ static void registry_handle_global(void *data, struct wl_registry *registry,
+@@ -251,6 +254,12 @@ static void registry_handle_global(void *data, struct wl_registry *registry,
                  wl_registry_bind(registry, id, &zxdg_decoration_manager_v1_interface, 1);
          }
      }
@@ -2253,10 +2253,10 @@ index dec81c3522c..8004a781388 100644
 +                                     &wp_color_manager_listener, NULL);
 +}
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index 42a1a37108e..47431c08ef9 100644
+index 67b2f3022a4..bccdc7d4b72 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
-@@ -43,6 +43,7 @@
+@@ -44,6 +44,7 @@
  #include "xdg-toplevel-tag-v1-client-protocol.h"
  #include "content-type-v1-client-protocol.h"
  #include "xdg-decoration-unstable-v1-client-protocol.h"
@@ -2264,7 +2264,7 @@ index 42a1a37108e..47431c08ef9 100644
  
  #include "windef.h"
  #include "winbase.h"
-@@ -227,6 +228,7 @@ struct wayland
+@@ -229,6 +230,7 @@ struct wayland
      struct xdg_toplevel_tag_manager_v1 *xdg_toplevel_tag_manager_v1;
      struct wp_content_type_manager_v1 *wp_content_type_manager_v1;
      struct zxdg_decoration_manager_v1 *zxdg_decoration_manager_v1;
@@ -2272,7 +2272,7 @@ index 42a1a37108e..47431c08ef9 100644
      struct wayland_seat seat;
      struct wayland_keyboard keyboard;
      struct wayland_pointer pointer;
-@@ -236,6 +238,9 @@ struct wayland
+@@ -238,6 +240,9 @@ struct wayland
      /* Protects the output_list and the wayland_output.current states. */
      pthread_mutex_t output_mutex;
      LONG input_serial;
@@ -2282,7 +2282,7 @@ index 42a1a37108e..47431c08ef9 100644
  };
  
  struct wayland_output_mode
-@@ -246,11 +251,24 @@ struct wayland_output_mode
+@@ -248,11 +253,24 @@ struct wayland_output_mode
      int32_t refresh;
  };
  
@@ -2307,7 +2307,7 @@ index 42a1a37108e..47431c08ef9 100644
      char *name;
      char *make;
      char *model;
-@@ -258,6 +276,11 @@ struct wayland_output_state
+@@ -260,6 +278,11 @@ struct wayland_output_state
      int logical_w, logical_h;
      int physical_w, physical_h;
      int transform;
@@ -2319,7 +2319,7 @@ index 42a1a37108e..47431c08ef9 100644
  };
  
  struct wayland_output
-@@ -265,6 +288,9 @@ struct wayland_output
+@@ -267,6 +290,9 @@ struct wayland_output
      struct wl_list link;
      struct wl_output *wl_output;
      struct zxdg_output_v1 *zxdg_output_v1;
@@ -2329,7 +2329,7 @@ index 42a1a37108e..47431c08ef9 100644
      uint32_t global_id;
      unsigned int pending_flags;
      struct wayland_output_state pending;
-@@ -370,6 +396,7 @@ BOOL wayland_output_create(uint32_t id, uint32_t version);
+@@ -372,6 +398,7 @@ BOOL wayland_output_create(uint32_t id, uint32_t version);
  void wayland_output_destroy(struct wayland_output *output);
  void wayland_output_use_xdg_extension(struct wayland_output *output);
  struct wayland_output *wayland_output_for_rect(const RECT *rect);

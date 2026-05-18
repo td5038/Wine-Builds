@@ -1,33 +1,33 @@
-From d59f8c3d58b695cf0a1cc0730ef0122bcb32aa4e Mon Sep 17 00:00:00 2001
+From fbf7912ae5983723a0621ffa950606920dd69407 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 25 Aug 2025 23:25:25 +0200
-Subject: [PATCH 04/10] ntdll: Allow launching apps from steam.exe stub
+Subject: [PATCH 04/11] ntdll: Allow launching apps from steam.exe stub
 
 Some games need to be launched from Proton's stub steam.exe to allow
 being launched on Linux and related systems: this allows doing so without
 any Proton script, but straight up from Wine.
 ---
- dlls/ntdll/unix/env.c          | 48 ++++++++++++++++++++++++++++------
- dlls/ntdll/unix/loader.c       | 27 +++++++++++++++++++
+ dlls/ntdll/unix/env.c          | 43 +++++++++++++++++++++++++++++-----
+ dlls/ntdll/unix/loader.c       | 27 +++++++++++++++++++++
  dlls/ntdll/unix/unix_private.h |  1 +
- 3 files changed, 68 insertions(+), 8 deletions(-)
+ 3 files changed, 65 insertions(+), 6 deletions(-)
 
 diff --git a/dlls/ntdll/unix/env.c b/dlls/ntdll/unix/env.c
-index 13264ddad6a..a8c661920af 100644
+index f7060b82d23..785b6ffdcc8 100644
 --- a/dlls/ntdll/unix/env.c
 +++ b/dlls/ntdll/unix/env.c
-@@ -1874,6 +1874,24 @@ static void init_peb( RTL_USER_PROCESS_PARAMETERS *params, void *module )
+@@ -1875,6 +1875,24 @@ static void init_peb( RTL_USER_PROCESS_PARAMETERS *params, void *module )
  }
  
  
 +/* HACK: Check for conditions to use the Steam stub */
-+static BOOL use_steam_stub()
++static BOOL use_steam_stub(void)
 +{
 +    static volatile char cache = -1;
 +    if (cache == -1)
 +    {
 +        const char *env = getenv("WINE_ENABLE_STEAM_STUB");
-+        
++
 +        if (env && atoi(env))
 +            cache = TRUE;
 +        else
@@ -41,21 +41,20 @@ index 13264ddad6a..a8c661920af 100644
  /*************************************************************************
   *		build_initial_params
   *
-@@ -1890,6 +1908,7 @@ static RTL_USER_PROCESS_PARAMETERS *build_initial_params( void **module )
+@@ -1891,6 +1909,7 @@ static RTL_USER_PROCESS_PARAMETERS *build_initial_params( void **module )
      WCHAR *curdir = get_initial_directory();
      UNICODE_STRING nt_name;
      NTSTATUS status;
 +    BOOL launch_with_steam = use_steam_stub();
+     TEB64 *teb64 = get_teb64( NtCurrentTeb() );
  
-     if (NtCurrentTeb64()) NtCurrentTeb64()->TlsSlots[WOW64_TLS_FILESYSREDIR] = TRUE;
- 
-@@ -1935,18 +1954,31 @@ static RTL_USER_PROCESS_PARAMETERS *build_initial_params( void **module )
+     if (teb64) teb64->TlsSlots[WOW64_TLS_FILESYSREDIR] = TRUE;
+@@ -1937,18 +1956,30 @@ static RTL_USER_PROCESS_PARAMETERS *build_initial_params( void **module )
          }
      }
  
 -    if (status)  /* try launching it through start.exe */
 +    /* check if we should launch from the Steam stub */
-+    /* launch using the steam wrapper */
 +    if (launch_with_steam)
      {
 -        static const char *args[] = { "start.exe", "/exec" };
@@ -67,12 +66,10 @@ index 13264ddad6a..a8c661920af 100644
 +        load_steam_exe( &nt_name, module );
 +        prepend_argv( args, 1 );
      }
--    else
--    {
+     else
+     {
 -        rebuild_argv();
--        if (NtCurrentTeb64()) NtCurrentTeb64()->TlsSlots[WOW64_TLS_FILESYSREDIR] = FALSE;
-+    /* or fallback to upstream behavior */
-+    else {
+-        if (teb64) teb64->TlsSlots[WOW64_TLS_FILESYSREDIR] = FALSE;
 +        if (status)  /* try launching it through start.exe */
 +        {
 +            static const char *args[] = { "start.exe", "/exec" };
@@ -84,13 +81,13 @@ index 13264ddad6a..a8c661920af 100644
 +        else
 +        {
 +            rebuild_argv();
-+            if (NtCurrentTeb64()) NtCurrentTeb64()->TlsSlots[WOW64_TLS_FILESYSREDIR] = FALSE;
++            if (teb64) teb64->TlsSlots[WOW64_TLS_FILESYSREDIR] = FALSE;
 +        }
      }
  
      main_wargv = build_wargv( get_dos_path( nt_name.Buffer ));
 diff --git a/dlls/ntdll/unix/loader.c b/dlls/ntdll/unix/loader.c
-index c1e6b588dcb..532be1d4b48 100644
+index c1e6b588dcb..c461b08c5aa 100644
 --- a/dlls/ntdll/unix/loader.c
 +++ b/dlls/ntdll/unix/loader.c
 @@ -1502,6 +1502,33 @@ NTSTATUS load_start_exe( UNICODE_STRING *nt_name, void **module )
@@ -120,7 +117,7 @@ index c1e6b588dcb..532be1d4b48 100644
 +        MESSAGE( "wine: failed to load steam.exe: %x\n", status );
 +        NtTerminateProcess( GetCurrentProcess(), status );
 +    }
-+    MESSAGE("wine: launching from steam.exe stub!\n");
++    MESSAGE( "wine: launching from steam.exe stub!\n" );
 +    return status;
 +}
 +
@@ -128,10 +125,10 @@ index c1e6b588dcb..532be1d4b48 100644
  {
      const DWORD *functions = (const DWORD *)((BYTE *)module + exports->AddressOfFunctions);
 diff --git a/dlls/ntdll/unix/unix_private.h b/dlls/ntdll/unix/unix_private.h
-index 0ebf87aad83..f698764125f 100644
+index ef1d9ef5005..054865bbfb5 100644
 --- a/dlls/ntdll/unix/unix_private.h
 +++ b/dlls/ntdll/unix/unix_private.h
-@@ -237,6 +237,7 @@ extern NTSTATUS load_unixlib_by_name( const UNICODE_STRING *nt_name, void **hand
+@@ -238,6 +238,7 @@ extern NTSTATUS load_unixlib_by_name( const UNICODE_STRING *nt_name, void **hand
  extern BOOL is_system_dir_path( const UNICODE_STRING *path, WORD *machine );
  extern NTSTATUS load_main_exe( UNICODE_STRING *nt_name, USHORT load_machine, void **module );
  extern NTSTATUS load_start_exe( UNICODE_STRING *nt_name, void **module );

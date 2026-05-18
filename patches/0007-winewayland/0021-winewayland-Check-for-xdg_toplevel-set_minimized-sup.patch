@@ -1,8 +1,8 @@
-From 4780168155ebe463ac84b7c4dd5e74796399f8f9 Mon Sep 17 00:00:00 2001
+From c1e92295edcfc934f336aa498cc35a1bffdf79d9 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 10 Apr 2026 21:25:37 -0500
-Subject: [PATCH 21/55] winewayland: Check for xdg_toplevel::set_minimized
+Subject: [PATCH 21/65] winewayland: Check for xdg_toplevel::set_minimized
  support
 
 ---
@@ -14,7 +14,7 @@ Subject: [PATCH 21/55] winewayland: Check for xdg_toplevel::set_minimized
  5 files changed, 81 insertions(+), 6 deletions(-)
 
 diff --git a/dlls/winewayland.drv/wayland.c b/dlls/winewayland.drv/wayland.c
-index 99d59fc1360..ee7a4b4c309 100644
+index 590e8c280af..3a8dad04f50 100644
 --- a/dlls/winewayland.drv/wayland.c
 +++ b/dlls/winewayland.drv/wayland.c
 @@ -135,7 +135,7 @@ static void registry_handle_global(void *data, struct wl_registry *registry,
@@ -123,10 +123,10 @@ index 1b162faf679..09e24c0475e 100644
  
  void wp_fractional_scale_handle_scale(void* user_data,
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index ec513328c69..98a25220335 100644
+index 922317e021d..4c8fa439aa5 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
-@@ -89,6 +89,16 @@ enum wayland_surface_role
+@@ -90,6 +90,16 @@ enum wayland_surface_role
      WAYLAND_SURFACE_ROLE_SUBSURFACE,
  };
  
@@ -143,7 +143,7 @@ index ec513328c69..98a25220335 100644
  struct wayland_keyboard
  {
      struct wl_keyboard *wl_keyboard;
-@@ -240,6 +250,7 @@ struct wayland_surface_config
+@@ -242,6 +252,7 @@ struct wayland_surface_config
      int32_t width, height;
      enum wayland_surface_config_state state;
      enum zxdg_toplevel_decoration_v1_mode decor;

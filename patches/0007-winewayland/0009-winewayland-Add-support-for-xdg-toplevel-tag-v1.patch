@@ -1,8 +1,8 @@
-From c000d67ed4a89a24ed02a073c1d2e9e1688ffca6 Mon Sep 17 00:00:00 2001
+From a7a03297061f2fd6d5648bf67339460735904a6e Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 15 Aug 2025 11:41:18 -0400
-Subject: [PATCH 09/55] winewayland: Add support for xdg-toplevel-tag-v1.
+Subject: [PATCH 09/65] winewayland: Add support for xdg-toplevel-tag-v1.
 
 Proton specific
 ---
@@ -15,10 +15,10 @@ Proton specific
  create mode 100644 dlls/winewayland.drv/xdg-toplevel-tag-v1.xml
 
 diff --git a/dlls/winewayland.drv/Makefile.in b/dlls/winewayland.drv/Makefile.in
-index 850bbb6572a..c62b7eb60bf 100644
+index ce65fc430c9..85bd768eec4 100644
 --- a/dlls/winewayland.drv/Makefile.in
 +++ b/dlls/winewayland.drv/Makefile.in
-@@ -31,4 +31,5 @@ SOURCES = \
+@@ -32,4 +32,5 @@ SOURCES = \
  	wlr-data-control-unstable-v1.xml \
  	xdg-output-unstable-v1.xml \
  	xdg-shell.xml \
@@ -26,10 +26,10 @@ index 850bbb6572a..c62b7eb60bf 100644
 +	xdg-toplevel-icon-v1.xml \
 +	xdg-toplevel-tag-v1.xml
 diff --git a/dlls/winewayland.drv/wayland.c b/dlls/winewayland.drv/wayland.c
-index 576900683be..6517f15bf78 100644
+index 83544c6aad4..65ff370d8ce 100644
 --- a/dlls/winewayland.drv/wayland.c
 +++ b/dlls/winewayland.drv/wayland.c
-@@ -211,6 +211,11 @@ static void registry_handle_global(void *data, struct wl_registry *registry,
+@@ -216,6 +216,11 @@ static void registry_handle_global(void *data, struct wl_registry *registry,
          process_wayland.wp_fractional_scale_manager_v1 =
              wl_registry_bind(registry, id, &wp_fractional_scale_manager_v1_interface, 1);
      }
@@ -41,7 +41,7 @@ index 576900683be..6517f15bf78 100644
  }
  
  static void registry_handle_global_remove(void *data, struct wl_registry *registry,
-@@ -348,6 +353,9 @@ BOOL wayland_process_init(void)
+@@ -353,6 +358,9 @@ BOOL wayland_process_init(void)
      if (!process_wayland.wp_fractional_scale_manager_v1)
          ERR("Wayland compositor doesn't support wp_fractional_scale_manager_v1 (fractional scaling will be broken)\n");
  
@@ -75,21 +75,21 @@ index f8ebf6da925..1514d458120 100644
          text[0] = 0;
      wayland_surface_set_title(surface, text);
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index 7de01600b1d..1f95bebdd63 100644
+index 0b0b4eac39e..a38a8b5585a 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
-@@ -40,6 +40,7 @@
- #include "ext-data-control-v1-client-protocol.h"
+@@ -41,6 +41,7 @@
  #include "xdg-toplevel-icon-v1-client-protocol.h"
+ #include "pointer-warp-v1-client-protocol.h"
  #include "fractional-scale-v1-client-protocol.h"
 +#include "xdg-toplevel-tag-v1-client-protocol.h"
  
  #include "windef.h"
  #include "winbase.h"
-@@ -188,6 +189,7 @@ struct wayland
-     struct wl_data_device_manager *wl_data_device_manager;
+@@ -190,6 +191,7 @@ struct wayland
      struct xdg_toplevel_icon_manager_v1 *xdg_toplevel_icon_manager_v1;
      struct wp_cursor_shape_manager_v1 *wp_cursor_shape_manager_v1;
+     struct wp_pointer_warp_v1 *wp_pointer_warp_v1;
 +    struct xdg_toplevel_tag_manager_v1 *xdg_toplevel_tag_manager_v1;
      struct wayland_seat seat;
      struct wayland_keyboard keyboard;

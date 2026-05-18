@@ -1,8 +1,8 @@
-From d7463ed3faa2ac1ed621f8be969760b7ef58b051 Mon Sep 17 00:00:00 2001
+From c46d1fa82674e362af9d1fabf12077640476e3b3 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 22 Apr 2026 23:06:46 -0500
-Subject: [PATCH 38/55] win32u: Implement cross thread keyboard layout query.
+Subject: [PATCH 37/65] win32u: Implement cross thread keyboard layout query.
 
 ---
  dlls/win32u/defwnd.c |  8 ++++++++

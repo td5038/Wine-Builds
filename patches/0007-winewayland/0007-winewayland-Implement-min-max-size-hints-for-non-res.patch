@@ -1,8 +1,8 @@
-From 4a1ffd4710e287eb435d4fdb9d2789b2127ee8b6 Mon Sep 17 00:00:00 2001
+From 3bc83692712dd3cfd4b7977d74287593ba37b0f4 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 17 Apr 2026 01:47:59 -0500
-Subject: [PATCH 07/55] winewayland: Implement min/max size hints for
+Subject: [PATCH 07/65] winewayland: Implement min/max size hints for
  non-resizeable windows.
 
 ---
@@ -39,10 +39,10 @@ index 03e6fa614fd..f8ebf6da925 100644
  }
  
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index 7a87c6259a5..7de01600b1d 100644
+index 0b22541680c..0b0b4eac39e 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
-@@ -249,6 +249,7 @@ struct wayland_window_config
+@@ -251,6 +251,7 @@ struct wayland_window_config
      BOOL visible;
      BOOL managed;
      BOOL minimized;

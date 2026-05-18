@@ -1,4 +1,4 @@
-From d58074c1af64d54a6f7e10f61855fea20469ac04 Mon Sep 17 00:00:00 2001
+From 9208c896b18fdfe2952d1f76dda24525e92521e9 Mon Sep 17 00:00:00 2001
 From: Paul Gofman <pgofman@codeweavers.com>
 Date: Tue, 15 Feb 2022 17:20:40 +0300
 Subject: [PATCH 1/6] fsync: Add WINE_FSYNC_SIMULATE_SCHED_QUANTUM config
@@ -13,7 +13,7 @@ CW-Bug-Id: #20155
  2 files changed, 11 insertions(+)
 
 diff --git a/dlls/ntdll/unix/env.c b/dlls/ntdll/unix/env.c
-index a8c661920af..7317a9afed3 100644
+index 785b6ffdcc8..3b6cbfe360d 100644
 --- a/dlls/ntdll/unix/env.c
 +++ b/dlls/ntdll/unix/env.c
 @@ -75,6 +75,7 @@ static const WCHAR bootstrapW[] = {'W','I','N','E','B','O','O','T','S','T','R','
@@ -48,10 +48,10 @@ index a8c661920af..7317a9afed3 100644
  
  
 diff --git a/dlls/ntdll/unix/unix_private.h b/dlls/ntdll/unix/unix_private.h
-index c0ce39101ef..6b468910b6e 100644
+index bafdb2656df..90cfa695c35 100644
 --- a/dlls/ntdll/unix/unix_private.h
 +++ b/dlls/ntdll/unix/unix_private.h
-@@ -211,6 +211,7 @@ extern BOOL is_prefix_bootstrap;
+@@ -212,6 +212,7 @@ extern BOOL is_prefix_bootstrap;
  extern int main_argc;
  extern char **main_argv;
  extern WCHAR **main_wargv;

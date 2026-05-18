@@ -1,8 +1,8 @@
-From 41262e44369546f618e0f0288f9299fbbfeddc5c Mon Sep 17 00:00:00 2001
+From 1e8093da1f551485d33e77269e4f2148c702e6b6 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 18 Apr 2026 19:05:16 -0500
-Subject: [PATCH 18/55] winewayland: Implement client surface caching.
+Subject: [PATCH 18/65] winewayland: Implement client surface caching.
 
 Requires: https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/34918
 ---
@@ -145,10 +145,10 @@ index e7a8433dd34..1b162faf679 100644
  
  err:
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index bbbf1343c86..ec513328c69 100644
+index e717939501a..922317e021d 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
-@@ -263,6 +263,7 @@ struct wayland_window_config
+@@ -265,6 +265,7 @@ struct wayland_window_config
  struct wayland_client_surface
  {
      struct client_surface client;
@@ -156,7 +156,7 @@ index bbbf1343c86..ec513328c69 100644
      HWND toplevel;
      struct wl_surface *wl_surface;
      struct wl_subsurface *wl_subsurface;
-@@ -397,6 +398,8 @@ struct wayland_win_data
+@@ -399,6 +400,8 @@ struct wayland_win_data
      struct wayland_client_surface *client_surface;
      /* window rects, relative to parent client area */
      struct window_rects rects;

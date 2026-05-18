@@ -1,7 +1,7 @@
-From 78d84e7bf5252e85728c412db1e6e2bf6ade666b Mon Sep 17 00:00:00 2001
+From bc432b52e60fcd18a3396d75a019bdc6f91a7148 Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Sun, 1 Feb 2026 01:54:17 +0100
-Subject: [PATCH 52/55] win32u: Add SetIMEEnabled driver call.
+Subject: [PATCH 51/65] win32u: Add SetIMEEnabled driver call.
 
 ---
  dlls/win32u/driver.c      | 12 ++++++++++++
@@ -9,7 +9,7 @@ Subject: [PATCH 52/55] win32u: Add SetIMEEnabled driver call.
  2 files changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/win32u/driver.c b/dlls/win32u/driver.c
-index 4d9708f377c..cdbffb5c616 100644
+index 75de5a2eb4e..ea0ff2b3fd1 100644
 --- a/dlls/win32u/driver.c
 +++ b/dlls/win32u/driver.c
 @@ -684,6 +684,11 @@ static BOOL nulldrv_SetIMECompositionRect( HWND hwnd, RECT rect )
@@ -24,7 +24,7 @@ index 4d9708f377c..cdbffb5c616 100644
  static LRESULT nulldrv_DesktopWindowProc( HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam )
  {
      return default_window_proc( hwnd, msg, wparam, lparam, FALSE );
-@@ -1112,6 +1117,11 @@ static BOOL loaderdrv_SetIMECompositionRect( HWND hwnd, RECT rect )
+@@ -1117,6 +1122,11 @@ static BOOL loaderdrv_SetIMECompositionRect( HWND hwnd, RECT rect )
      return load_driver()->pSetIMECompositionRect( hwnd, rect );
  }
  
@@ -36,7 +36,7 @@ index 4d9708f377c..cdbffb5c616 100644
  static LONG loaderdrv_ChangeDisplaySettings( LPDEVMODEW displays, LPCWSTR primary_name, HWND hwnd,
                                               DWORD flags, LPVOID lparam )
  {
-@@ -1257,6 +1267,7 @@ static const struct user_driver_funcs lazy_load_driver =
+@@ -1267,6 +1277,7 @@ static const struct user_driver_funcs lazy_load_driver =
      loaderdrv_ImeToAsciiEx,
      loaderdrv_NotifyIMEStatus,
      loaderdrv_SetIMECompositionRect,
@@ -44,7 +44,7 @@ index 4d9708f377c..cdbffb5c616 100644
      /* cursor/icon functions */
      nulldrv_DestroyCursorIcon,
      loaderdrv_SetCursor,
-@@ -1361,6 +1372,7 @@ void __wine_set_user_driver( const struct user_driver_funcs *funcs, UINT version
+@@ -1372,6 +1383,7 @@ void __wine_set_user_driver( const struct user_driver_funcs *funcs, UINT version
      SET_USER_FUNC(ImeToAsciiEx);
      SET_USER_FUNC(NotifyIMEStatus);
      SET_USER_FUNC(SetIMECompositionRect);
@@ -53,7 +53,7 @@ index 4d9708f377c..cdbffb5c616 100644
      SET_USER_FUNC(SetCursor);
      SET_USER_FUNC(GetCursorPos);
 diff --git a/include/wine/gdi_driver.h b/include/wine/gdi_driver.h
-index 97c646d6ec9..8050ff95bf0 100644
+index 4cb6b01560a..c0c2d2a008a 100644
 --- a/include/wine/gdi_driver.h
 +++ b/include/wine/gdi_driver.h
 @@ -218,7 +218,7 @@ struct gdi_dc_funcs

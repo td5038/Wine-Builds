@@ -1,8 +1,8 @@
-From ba50e0a6bcaea7260afba95bf54c19139f2ec6dd Mon Sep 17 00:00:00 2001
+From 29c69f304c1e16c99516334107f79e656629b4a0 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 20 Apr 2026 22:49:35 -0500
-Subject: [PATCH 30/55] winewayland: Treat maximized,fullscreen state as
+Subject: [PATCH 30/65] winewayland: Treat maximized,fullscreen state as
  fullscreen.
 
 ---

@@ -1,8 +1,8 @@
-From de3e65899caba7e5e6d475495654b787d2245c62 Mon Sep 17 00:00:00 2001
+From 5aaade285de13c4244410fb5b7d199be86bc0b30 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 17 Apr 2026 21:07:55 -0500
-Subject: [PATCH 11/55] winewayland: Put fullscreen windows on associated
+Subject: [PATCH 11/65] winewayland: Put fullscreen windows on associated
  output.
 
 ---
@@ -129,10 +129,10 @@ index a8ef188b7c3..b00dd644092 100644
  
      case WAYLAND_SURFACE_ROLE_SUBSURFACE:
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index 59a52611b3b..afefaaca5fe 100644
+index 2920a29b4d1..87e4ddabed6 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
-@@ -297,6 +297,7 @@ struct wayland_surface
+@@ -299,6 +299,7 @@ struct wayland_surface
              struct xdg_surface *xdg_surface;
              struct xdg_toplevel *xdg_toplevel;
              struct xdg_toplevel_icon_v1 *xdg_toplevel_icon;
@@ -140,7 +140,7 @@ index 59a52611b3b..afefaaca5fe 100644
          };
          struct
          {
-@@ -325,6 +326,7 @@ BOOL wayland_process_init(void);
+@@ -327,6 +328,7 @@ BOOL wayland_process_init(void);
  BOOL wayland_output_create(uint32_t id, uint32_t version);
  void wayland_output_destroy(struct wayland_output *output);
  void wayland_output_use_xdg_extension(struct wayland_output *output);

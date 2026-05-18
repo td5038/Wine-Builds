@@ -1,8 +1,8 @@
-From 9ddf6e249ba6cf1a6b580c88cff4e14e3f949b8d Mon Sep 17 00:00:00 2001
+From ba5ca8a60a4deac6b7cb40dfce076989ce01676b Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 9 Jun 2025 09:07:33 -0400
-Subject: [PATCH 34/55] winewayland: Implement support for FlashWindow.
+Subject: [PATCH 34/65] winewayland: Implement support for FlashWindow.
 
 ---
  dlls/winewayland.drv/Makefile.in           |   1 +
@@ -16,10 +16,10 @@ Subject: [PATCH 34/55] winewayland: Implement support for FlashWindow.
  create mode 100644 dlls/winewayland.drv/xdg-activation-v1.xml
 
 diff --git a/dlls/winewayland.drv/Makefile.in b/dlls/winewayland.drv/Makefile.in
-index 7a39531d30f..03844503762 100644
+index 13a964cca0d..b2f486cbcc3 100644
 --- a/dlls/winewayland.drv/Makefile.in
 +++ b/dlls/winewayland.drv/Makefile.in
-@@ -31,6 +31,7 @@ SOURCES = \
+@@ -32,6 +32,7 @@ SOURCES = \
  	window.c \
  	window_surface.c \
  	wlr-data-control-unstable-v1.xml \
@@ -28,10 +28,10 @@ index 7a39531d30f..03844503762 100644
  	xdg-output-unstable-v1.xml \
  	xdg-shell.xml \
 diff --git a/dlls/winewayland.drv/wayland.c b/dlls/winewayland.drv/wayland.c
-index 063b3685414..818faac89e3 100644
+index dfb209b1b72..248e831fc1b 100644
 --- a/dlls/winewayland.drv/wayland.c
 +++ b/dlls/winewayland.drv/wayland.c
-@@ -255,6 +255,11 @@ static void registry_handle_global(void *data, struct wl_registry *registry,
+@@ -260,6 +260,11 @@ static void registry_handle_global(void *data, struct wl_registry *registry,
              wl_registry_bind(registry, id, &wp_color_manager_v1_interface, 1);
          if (process_wayland.wp_color_manager_v1) wayland_color_manager_init();
      }
@@ -43,7 +43,7 @@ index 063b3685414..818faac89e3 100644
  }
  
  static void registry_handle_global_remove(void *data, struct wl_registry *registry,
-@@ -401,6 +406,9 @@ BOOL wayland_process_init(void)
+@@ -406,6 +411,9 @@ BOOL wayland_process_init(void)
      if (!process_wayland.zxdg_decoration_manager_v1)
          WARN("Wayland compositor doesn't support optional zxdg_decoration_manager_v1!\n");
  
@@ -106,10 +106,10 @@ index b013e0359f9..429ed8715e7 100644
 +    }
 +}
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index 47431c08ef9..56eeb8738b0 100644
+index bccdc7d4b72..9418410f63c 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
-@@ -44,6 +44,7 @@
+@@ -45,6 +45,7 @@
  #include "content-type-v1-client-protocol.h"
  #include "xdg-decoration-unstable-v1-client-protocol.h"
  #include "color-management-v1-client-protocol.h"
@@ -117,7 +117,7 @@ index 47431c08ef9..56eeb8738b0 100644
  
  #include "windef.h"
  #include "winbase.h"
-@@ -229,6 +230,7 @@ struct wayland
+@@ -231,6 +232,7 @@ struct wayland
      struct wp_content_type_manager_v1 *wp_content_type_manager_v1;
      struct zxdg_decoration_manager_v1 *zxdg_decoration_manager_v1;
      struct wp_color_manager_v1 *wp_color_manager_v1;
@@ -125,7 +125,7 @@ index 47431c08ef9..56eeb8738b0 100644
      struct wayland_seat seat;
      struct wayland_keyboard keyboard;
      struct wayland_pointer pointer;
-@@ -427,6 +429,7 @@ void wayland_surface_ensure_contents(struct wayland_surface *surface);
+@@ -429,6 +431,7 @@ void wayland_surface_ensure_contents(struct wayland_surface *surface);
  void wayland_surface_set_title(struct wayland_surface *surface, LPCWSTR title);
  void wayland_surface_assign_icon(struct wayland_surface *surface);
  void wayland_surface_set_icon_buffer(struct wayland_surface *surface, UINT type, const ICONINFO *ii);
@@ -133,7 +133,7 @@ index 47431c08ef9..56eeb8738b0 100644
  
  static inline BOOL wayland_surface_is_toplevel(struct wayland_surface *surface)
  {
-@@ -549,6 +552,7 @@ LRESULT WAYLAND_ClipboardWindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM l
+@@ -551,6 +554,7 @@ LRESULT WAYLAND_ClipboardWindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM l
  BOOL WAYLAND_ClipCursor(const RECT *clip, BOOL reset);
  LRESULT WAYLAND_DesktopWindowProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp);
  void WAYLAND_DestroyWindow(HWND hwnd);

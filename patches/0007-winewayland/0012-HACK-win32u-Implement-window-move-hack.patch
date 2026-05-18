@@ -1,8 +1,8 @@
-From e509bd8c477afdd23a2b31d74d91cdd7162f0c46 Mon Sep 17 00:00:00 2001
+From 0fb7f40e49b2c8d6e38ddb603128f7b672d81828 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 17 Apr 2026 23:18:22 -0500
-Subject: [PATCH 12/55] HACK: win32u: Implement window move hack
+Subject: [PATCH 12/65] HACK: win32u: Implement window move hack
 
 ---
  dlls/win32u/window.c | 64 +++++++++++++++++++++++++++++++++++++++++++-

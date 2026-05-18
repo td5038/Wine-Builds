@@ -1,8 +1,8 @@
-From 61aa69b6290e56f515756b16fdf07e4291acba6c Mon Sep 17 00:00:00 2001
+From 32a5f89a80da11c327607d9b3598443158dd8827 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 8 Nov 2025 13:42:41 -0600
-Subject: [PATCH 04/55] winewayland: Implement ext-data-control-v1.
+Subject: [PATCH 04/65] winewayland: Implement ext-data-control-v1.
 
 Drop in replacement for wlr, but also keep it around to keep compat
 ---
@@ -16,7 +16,7 @@ Drop in replacement for wlr, but also keep it around to keep compat
  create mode 100644 dlls/winewayland.drv/ext-data-control-v1.xml
 
 diff --git a/dlls/winewayland.drv/Makefile.in b/dlls/winewayland.drv/Makefile.in
-index 1f1b2ccf8af..1f75903605e 100644
+index cbc49823cd6..7037d4ed194 100644
 --- a/dlls/winewayland.drv/Makefile.in
 +++ b/dlls/winewayland.drv/Makefile.in
 @@ -10,6 +10,7 @@ SOURCES = \
@@ -26,7 +26,7 @@ index 1f1b2ccf8af..1f75903605e 100644
 +	ext-data-control-v1.xml \
  	opengl.c \
  	pointer-constraints-unstable-v1.xml \
- 	relative-pointer-unstable-v1.xml \
+ 	pointer-warp-v1.xml \
 diff --git a/dlls/winewayland.drv/ext-data-control-v1.xml b/dlls/winewayland.drv/ext-data-control-v1.xml
 new file mode 100644
 index 00000000000..37ee577ed92
@@ -310,7 +310,7 @@ index 00000000000..37ee577ed92
 +  </interface>
 +</protocol>
 diff --git a/dlls/winewayland.drv/wayland.c b/dlls/winewayland.drv/wayland.c
-index 97f771f8fcc..2c48a6d2bf1 100644
+index 6213576e1ce..fce69bb5ac3 100644
 --- a/dlls/winewayland.drv/wayland.c
 +++ b/dlls/winewayland.drv/wayland.c
 @@ -148,6 +148,7 @@ static void registry_handle_global(void *data, struct wl_registry *registry,
@@ -333,7 +333,7 @@ index 97f771f8fcc..2c48a6d2bf1 100644
      else if (strcmp(interface, "wl_data_device_manager") == 0)
      {
          process_wayland.wl_data_device_manager =
-@@ -327,8 +333,8 @@ BOOL wayland_process_init(void)
+@@ -332,8 +338,8 @@ BOOL wayland_process_init(void)
      {
          if (!process_wayland.wl_data_device_manager)
              ERR("Wayland compositor doesn't support optional wl_data_device_manager (clipboard won't work)\n");
@@ -635,7 +635,7 @@ index 1a2cd27fe80..1ef4b2846b0 100644
              !is_winewayland_clipboard_hwnd(hwnd))
          {
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index 551d297ed60..7da780bce77 100644
+index a48034a765f..01bf55ab91b 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
 @@ -37,6 +37,7 @@
@@ -644,9 +644,9 @@ index 551d297ed60..7da780bce77 100644
  #include "wlr-data-control-unstable-v1-client-protocol.h"
 +#include "ext-data-control-v1-client-protocol.h"
  #include "xdg-toplevel-icon-v1-client-protocol.h"
+ #include "pointer-warp-v1-client-protocol.h"
  
- #include "windef.h"
-@@ -150,6 +151,12 @@ struct wayland_data_device
+@@ -151,6 +152,12 @@ struct wayland_data_device
              struct zwlr_data_control_offer_v1 *clipboard_zwlr_data_control_offer_v1;
          };
          struct
@@ -659,7 +659,7 @@ index 551d297ed60..7da780bce77 100644
          {
              struct wl_data_device *wl_data_device;
              struct wl_data_source *wl_data_source;
-@@ -175,6 +182,7 @@ struct wayland
+@@ -176,6 +183,7 @@ struct wayland
      struct zwp_relative_pointer_manager_v1 *zwp_relative_pointer_manager_v1;
      struct zwp_text_input_manager_v3 *zwp_text_input_manager_v3;
      struct zwlr_data_control_manager_v1 *zwlr_data_control_manager_v1;

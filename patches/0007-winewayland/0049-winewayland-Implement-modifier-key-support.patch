@@ -1,8 +1,8 @@
-From 7d713b813ac6f59923f67222436c4ab1d777831a Mon Sep 17 00:00:00 2001
+From 648d27679bc03930f8bd65251bb27982a91c5089 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Mon, 27 Apr 2026 12:33:51 -0500
-Subject: [PATCH 50/55] winewayland: Implement modifier key support.
+Subject: [PATCH 49/65] winewayland: Implement modifier key support.
 
 ---
  dlls/winewayland.drv/wayland_keyboard.c | 62 ++++++++++++++++++++++++-

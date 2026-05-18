@@ -1,8 +1,8 @@
-From 5391689f56ab45e364871a32ee2ca8bb8724971c Mon Sep 17 00:00:00 2001
+From 94baa8a41319f5bccce3dab179f64a6769523f4a Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 22 Apr 2026 01:31:18 -0500
-Subject: [PATCH 32/55] winewayland: Implement support for wl_output geometry
+Subject: [PATCH 32/65] winewayland: Implement support for wl_output geometry
  events.
 
 ---
@@ -146,10 +146,10 @@ index ce388d02f21..dec81c3522c 100644
          wayland_output_use_xdg_extension(output);
  
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index 1eaf2015f12..42a1a37108e 100644
+index 4795ca5d13f..67b2f3022a4 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
-@@ -252,8 +252,11 @@ struct wayland_output_state
+@@ -254,8 +254,11 @@ struct wayland_output_state
      struct rb_tree modes;
      struct wayland_output_mode *current_mode;
      char *name;

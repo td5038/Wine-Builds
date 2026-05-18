@@ -1,8 +1,8 @@
-From 86b506dd4202acda53769116c49900c9da62ba41 Mon Sep 17 00:00:00 2001
+From 8fdf3d2924fcee764cdac0533e918909dc527589 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sun, 19 Apr 2026 02:25:53 -0500
-Subject: [PATCH 23/55] winewayland: Move pointer input processing to frame
+Subject: [PATCH 23/65] winewayland: Move pointer input processing to frame
  event.
 
 Also implements raw input
@@ -12,7 +12,7 @@ Also implements raw input
  2 files changed, 130 insertions(+), 39 deletions(-)
 
 diff --git a/dlls/winewayland.drv/wayland_pointer.c b/dlls/winewayland.drv/wayland_pointer.c
-index fb93407088a..275d8b95139 100644
+index 109dd2dd0eb..6dab82b41d0 100644
 --- a/dlls/winewayland.drv/wayland_pointer.c
 +++ b/dlls/winewayland.drv/wayland_pointer.c
 @@ -121,9 +121,21 @@ static HWND wayland_pointer_get_focused_hwnd(void)
@@ -259,10 +259,10 @@ index fb93407088a..275d8b95139 100644
              zwp_relative_pointer_manager_v1_get_relative_pointer(
                  process_wayland.zwp_relative_pointer_manager_v1,
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index 98a25220335..122c5106475 100644
+index 4c8fa439aa5..169b6d6dd9f 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
-@@ -116,6 +116,24 @@ struct wayland_cursor
+@@ -117,6 +117,24 @@ struct wayland_cursor
      int hotspot_x, hotspot_y;
  };
  
@@ -287,7 +287,7 @@ index 98a25220335..122c5106475 100644
  struct wayland_pointer
  {
      struct wl_pointer *wl_pointer;
-@@ -129,8 +147,7 @@ struct wayland_pointer
+@@ -130,8 +148,7 @@ struct wayland_pointer
      uint32_t enter_serial;
      uint32_t button_serial;
      struct wayland_cursor cursor;

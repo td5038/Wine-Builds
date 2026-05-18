@@ -1,8 +1,8 @@
-From 3ae7c5d2a12a676adfa48226ce5b59acf13e2c14 Mon Sep 17 00:00:00 2001
+From 00f222eec333b65059bb49ba4a60c2dc677d4546 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 1 Oct 2025 12:52:35 -0500
-Subject: [PATCH 42/55] winewayland: Generate KBDTABLES dead key tables.
+Subject: [PATCH 41/65] winewayland: Generate KBDTABLES dead key tables.
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -15,10 +15,10 @@ Co-Authored-By: Rémi Bernon <rbernon@codeweavers.com>
  3 files changed, 187 insertions(+), 8 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 50c190379a8..b53488039c3 100644
+index 4dfb34274d0..cc60afea70d 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1455,7 +1455,8 @@ then
+@@ -1456,7 +1456,8 @@ then
                              [`test -n "$PKG_CONFIG" && $PKG_CONFIG --variable=wayland_scanner wayland-scanner 2>/dev/null`])],
                [WAYLAND_CLIENT_LIBS=""],[$WAYLAND_CLIENT_LIBS])])])
      WINE_PACKAGE_FLAGS(XKBCOMMON,[xkbcommon],,,,
@@ -365,7 +365,7 @@ index 0e625d9ba60..bf5e5c15424 100644
  
  static void keyboard_handle_enter(void *private, struct wl_keyboard *wl_keyboard,
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index 797b83af4ca..1e871413f88 100644
+index 9418410f63c..232ffaa80a3 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
 @@ -29,6 +29,11 @@

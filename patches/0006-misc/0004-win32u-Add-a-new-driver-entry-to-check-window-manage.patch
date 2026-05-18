@@ -1,7 +1,7 @@
-From f9f7cd8bd98835642ea4dd02c53af344c63c1fca Mon Sep 17 00:00:00 2001
+From 9064148042cb2be68a974202e53c270e0af71536 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Tue, 3 Dec 2024 12:46:56 +0100
-Subject: [PATCH 02/19] win32u: Add a new driver entry to check window manager
+Subject: [PATCH 4/5] win32u: Add a new driver entry to check window manager
  name.
 
 ---
@@ -68,10 +68,10 @@ index 09ef2bf8664..4773819fa6a 100644
      .pProcessEvents = X11DRV_ProcessEvents,
      .pReleaseDC = X11DRV_ReleaseDC,
 diff --git a/dlls/winex11.drv/window.c b/dlls/winex11.drv/window.c
-index 933781b4d99..e2112ccb5a6 100644
+index eec282e228c..f5be4994be9 100644
 --- a/dlls/winex11.drv/window.c
 +++ b/dlls/winex11.drv/window.c
-@@ -3769,6 +3769,12 @@ void net_supported_init( struct x11drv_thread_data *data )
+@@ -3777,6 +3777,12 @@ void net_supported_init( struct x11drv_thread_data *data )
      }
  }
  

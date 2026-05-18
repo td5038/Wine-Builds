@@ -1,8 +1,8 @@
-From e3d74fb5cba1895ccba361bb358e60aee240f5ef Mon Sep 17 00:00:00 2001
+From 8a5d635befaec33dddd06944d5f7c89639b7f210 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 24 Apr 2026 17:18:02 -0500
-Subject: [PATCH 44/55] win32u: Implement wide vk2char conversion.
+Subject: [PATCH 43/65] win32u: Implement wide vk2char conversion.
 
 ---
  dlls/win32u/input.c | 31 ++++++++++++++++++-------------

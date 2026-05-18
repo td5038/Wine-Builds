@@ -1,8 +1,8 @@
-From 74e7394a308c5cda97b9054f8042389ac6a3f663 Mon Sep 17 00:00:00 2001
+From a37da122557d3fbaf3fae7a536e4fff13a6cf00f Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 6 Mar 2026 17:02:29 -0600
-Subject: [PATCH 40/55] winewayland: Rework ensure contents to avoid compositor
+Subject: [PATCH 39/65] winewayland: Rework ensure contents to avoid compositor
  bugs.
 
 Not a fan of having to change this but hyprland is hyprland i guess

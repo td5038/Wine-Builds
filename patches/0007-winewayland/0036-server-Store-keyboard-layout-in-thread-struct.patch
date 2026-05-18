@@ -1,8 +1,8 @@
-From 33f550acc8c97f6384b721e0b3ad9fd160e26a97 Mon Sep 17 00:00:00 2001
+From 91f112409055d498247c09255d0107aba5388d75 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 27 Nov 2025 16:38:54 -0600
-Subject: [PATCH 37/55] server: Store keyboard layout in thread struct.
+Subject: [PATCH 36/65] server: Store keyboard layout in thread struct.
 
 ---
  server/protocol.def | 12 ++++++++++++
@@ -12,10 +12,10 @@ Subject: [PATCH 37/55] server: Store keyboard layout in thread struct.
  4 files changed, 35 insertions(+)
 
 diff --git a/server/protocol.def b/server/protocol.def
-index 374d60b2a39..ccb27e398cd 100644
+index 83cf64ceb1a..914da43b49f 100644
 --- a/server/protocol.def
 +++ b/server/protocol.def
-@@ -3034,6 +3034,18 @@ enum coords_relative
+@@ -3037,6 +3037,18 @@ enum coords_relative
      obj_handle_t   handle;        /* handle to the desktop */
  @END
  
@@ -35,10 +35,10 @@ index 374d60b2a39..ccb27e398cd 100644
  /* Set the thread current desktop */
  @REQ(set_thread_desktop)
 diff --git a/server/thread.c b/server/thread.c
-index bbb0ac49fe0..25835076e32 100644
+index 3e059462f06..348615b6144 100644
 --- a/server/thread.c
 +++ b/server/thread.c
-@@ -429,6 +429,7 @@ static inline void init_thread_structure( struct thread *thread )
+@@ -431,6 +431,7 @@ static inline void init_thread_structure( struct thread *thread )
      thread->token           = NULL;
      thread->desc            = NULL;
      thread->desc_len        = 0;
@@ -47,12 +47,12 @@ index bbb0ac49fe0..25835076e32 100644
  
      thread->creation_time = current_time;
 diff --git a/server/thread.h b/server/thread.h
-index 9ea00e6be79..2e3f4934bf0 100644
+index b9be67fe6d5..86707f3746c 100644
 --- a/server/thread.h
 +++ b/server/thread.h
-@@ -91,6 +91,7 @@ struct thread
-     int                    dbg_hidden;    /* hidden from debugger */
-     int                    bypass_proc_suspend; /* will still run if the process is suspended */
+@@ -92,6 +92,7 @@ struct thread
+     bool                   dbg_hidden;    /* hidden from debugger */
+     bool                   bypass_proc_suspend; /* will still run if the process is suspended */
      obj_handle_t           desktop;       /* desktop handle */
 +    client_ptr_t           layout;        /* keyboard layout handle */
      int                    desktop_users; /* number of objects using the thread desktop */

@@ -1,7 +1,7 @@
-From c705e4fd3a5987ccd2e9ebf293b6f0973c0d9626 Mon Sep 17 00:00:00 2001
+From df91306d4845c642eac633d8c137e6d3e5656bec Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Thu, 18 Sep 2025 11:50:52 +0200
-Subject: [PATCH 05/10] ntdll: set WINE_ENABLE_STEAM_STUB for GI
+Subject: [PATCH 05/11] HACK: ntdll: Set WINE_ENABLE_STEAM_STUB for some games.
 
 Based on Proton's hacks_init() function.
 ---
@@ -9,7 +9,7 @@ Based on Proton's hacks_init() function.
  1 file changed, 13 insertions(+)
 
 diff --git a/dlls/ntdll/unix/loader.c b/dlls/ntdll/unix/loader.c
-index 532be1d4b48..a7e5cc8948e 100644
+index c461b08c5aa..7d817c4e2b3 100644
 --- a/dlls/ntdll/unix/loader.c
 +++ b/dlls/ntdll/unix/loader.c
 @@ -1878,6 +1878,18 @@ static ULONG_PTR get_image_address(void)

@@ -1,8 +1,8 @@
-From 6d1a0095724c73f80ddb14b6f1f23d239e52fdb9 Mon Sep 17 00:00:00 2001
+From ed4d7e73efe08d1f2b04f0d29dd491c95eda7725 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 17 Apr 2026 20:35:31 -0500
-Subject: [PATCH 10/55] winewayland: Implement wp_content_type_v1.
+Subject: [PATCH 10/65] winewayland: Implement wp_content_type_v1.
 
 ---
  dlls/winewayland.drv/Makefile.in         |   1 +
@@ -14,7 +14,7 @@ Subject: [PATCH 10/55] winewayland: Implement wp_content_type_v1.
  create mode 100644 dlls/winewayland.drv/content-type-v1.xml
 
 diff --git a/dlls/winewayland.drv/Makefile.in b/dlls/winewayland.drv/Makefile.in
-index c62b7eb60bf..14828f225ae 100644
+index 85bd768eec4..e1e4a385542 100644
 --- a/dlls/winewayland.drv/Makefile.in
 +++ b/dlls/winewayland.drv/Makefile.in
 @@ -7,6 +7,7 @@ IMPORTS = user32 win32u
@@ -160,10 +160,10 @@ index 00000000000..65a1acb80f4
 +  </interface>
 +</protocol>
 diff --git a/dlls/winewayland.drv/wayland.c b/dlls/winewayland.drv/wayland.c
-index 6517f15bf78..1129f63fb4b 100644
+index 65ff370d8ce..1311e6b4c1e 100644
 --- a/dlls/winewayland.drv/wayland.c
 +++ b/dlls/winewayland.drv/wayland.c
-@@ -216,6 +216,11 @@ static void registry_handle_global(void *data, struct wl_registry *registry,
+@@ -221,6 +221,11 @@ static void registry_handle_global(void *data, struct wl_registry *registry,
          process_wayland.xdg_toplevel_tag_manager_v1 =
              wl_registry_bind(registry, id, &xdg_toplevel_tag_manager_v1_interface, 1);
      }
@@ -175,7 +175,7 @@ index 6517f15bf78..1129f63fb4b 100644
  }
  
  static void registry_handle_global_remove(void *data, struct wl_registry *registry,
-@@ -356,6 +361,9 @@ BOOL wayland_process_init(void)
+@@ -361,6 +366,9 @@ BOOL wayland_process_init(void)
      if (!process_wayland.xdg_toplevel_tag_manager_v1)
          WARN("Wayland compositor doesn't support optional xdg_toplevel_tag_manager_v1!\n");
  
@@ -221,26 +221,26 @@ index 1514d458120..a8ef188b7c3 100644
  
  err:
 diff --git a/dlls/winewayland.drv/waylanddrv.h b/dlls/winewayland.drv/waylanddrv.h
-index 1f95bebdd63..59a52611b3b 100644
+index a38a8b5585a..2920a29b4d1 100644
 --- a/dlls/winewayland.drv/waylanddrv.h
 +++ b/dlls/winewayland.drv/waylanddrv.h
-@@ -41,6 +41,7 @@
- #include "xdg-toplevel-icon-v1-client-protocol.h"
+@@ -42,6 +42,7 @@
+ #include "pointer-warp-v1-client-protocol.h"
  #include "fractional-scale-v1-client-protocol.h"
  #include "xdg-toplevel-tag-v1-client-protocol.h"
 +#include "content-type-v1-client-protocol.h"
  
  #include "windef.h"
  #include "winbase.h"
-@@ -190,6 +191,7 @@ struct wayland
-     struct xdg_toplevel_icon_manager_v1 *xdg_toplevel_icon_manager_v1;
+@@ -192,6 +193,7 @@ struct wayland
      struct wp_cursor_shape_manager_v1 *wp_cursor_shape_manager_v1;
+     struct wp_pointer_warp_v1 *wp_pointer_warp_v1;
      struct xdg_toplevel_tag_manager_v1 *xdg_toplevel_tag_manager_v1;
 +    struct wp_content_type_manager_v1 *wp_content_type_manager_v1;
      struct wayland_seat seat;
      struct wayland_keyboard keyboard;
      struct wayland_pointer pointer;
-@@ -261,6 +263,7 @@ struct wayland_client_surface
+@@ -263,6 +265,7 @@ struct wayland_client_surface
      struct wl_surface *wl_surface;
      struct wl_subsurface *wl_subsurface;
      struct wp_viewport *wp_viewport;
