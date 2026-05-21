@@ -1,16 +1,20 @@
-# Spritz-Wine-TkG
+# Spritz-Wine
 
-`Spritz-Wine-TkG` is a custom Wine build aimed at making playing certain
-anime games easier, without missing any of Wine's latest additions.
+`Spritz-Wine` is a custom Wine build aimed at making playing certain
+games easier, without missing any of Wine's latest additions.
 
 ## Download
 
-Spritz-Wine builds are available in all [an-anime-team](https://github.com/an-anime-team)'s launchers, but you can also download the latest version from the repository's [releases](https://github.com/NelloKudo/Wine-Builds/releases).
+- [AUR](https://aur.archlinux.org/packages/spritz-wine-bin)
+- [Releases](https://github.com/NelloKudo/spritz-wine/releases)
+
+Spritz-Wine builds are also available in all [an-anime-team](https://github.com/an-anime-team)'s game launchers.
 
 ## Features:
 
-- Fixes various issues with **certain anime games**, from launch issues to hanging on exit
 - Rebased to **latest wine-staging**
+- Includes fixes for games compatibility from [dwproton](https://dawn.wine/dawn-winery/dwproton)
+- Includes winewayland patches from [Proton-EM](https://github.com/Etaash-mathamsetty/Proton) rebased to latest wine
 - Bundles both **fsync/NTsync** in the same build, with NTsync used by default if available
 - Includes many of Wine-TkG's fixes
 - Backported and reworked many patches from Proton, mostly aiming controllers
@@ -27,6 +31,7 @@ Spritz-Wine builds are available in all [an-anime-team](https://github.com/an-an
   - `WINE_ENABLE_DISCONNECT=1`: enables the disconnecting trick
   - `WINE_ENABLE_STEAM_STUB=1`: launches the executable using the `steam.exe` stub in the builds
   - `WINE_ENABLE_TIMEOUT_FIX=1`: enables experimental timeout fix when needed
+  - `WINE_USE_WINEDMO=1`: enables the winedmo renderer backend
 
 - Proton imported patches:
   - `PROTON_PREFER_SDL=1`: uses SDL instead of hidraw, disabling it (already default)

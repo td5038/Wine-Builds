@@ -1,8 +1,8 @@
-From 7e20f3ea71b9ed08f39636be8fd85c54774c5092 Mon Sep 17 00:00:00 2001
+From c20f16afd46418d13952455183bbeb8779d29344 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 25 Apr 2026 22:02:47 -0500
-Subject: [PATCH 47/65] winewayland: Fix handling of numlock and right shift.
+Subject: [PATCH 47/70] winewayland: Fix handling of numlock and right shift.
 
 ---
  dlls/winewayland.drv/wayland_keyboard.c | 36 +++++++++++++++++--------

@@ -1,7 +1,7 @@
-From 0752cc97144b5217ae15f5d4f79fdc1bfddf6efd Mon Sep 17 00:00:00 2001
+From 48c433dee4ff1767a1da3d8f258a59d260ab8749 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 25 Aug 2025 20:39:20 +0200
-Subject: [PATCH 03/11] programs: add Steam.exe stub from Proton
+Subject: [PATCH 03/10] programs: Add Steam.exe stub from Proton.
 
 Attempt at including the steam.exe stub from Valve's Proton to Wine,
 source for the file: https://github.com/ValveSoftware/Proton/tree/1e52f95633c5145aaf54bc27476021d9e1baade2/steam_helper

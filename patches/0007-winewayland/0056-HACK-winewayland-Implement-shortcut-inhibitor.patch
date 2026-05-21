@@ -1,8 +1,8 @@
-From ba81f8842107ea7c8c37fa8f215500ebcd78d137 Mon Sep 17 00:00:00 2001
+From 9a203c88ca6458957eb303c102b96f3664a85f52 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 1 May 2026 16:19:01 -0500
-Subject: [PATCH 56/65] HACK: winewayland: Implement shortcut inhibitor.
+Subject: [PATCH 56/70] HACK: winewayland: Implement shortcut inhibitor.
 
 (cherry picked from commit 64a941ddce12136cb30040ab6c9501106565cf5a)
 ---

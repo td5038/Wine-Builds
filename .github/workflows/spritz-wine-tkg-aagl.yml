@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - 'wine-tkg-aagl*'
+      - 'spritz-wine*'
 
 jobs:
   build:
@@ -70,5 +70,5 @@ jobs:
         uses: softprops/action-gh-release@v2.2.1
         with:
           files: ./artifacts/*.tar.xz
-          name: "Spritz-Wine-TkG-AAGL-${{ steps.extract_version.outputs.version }}"
+          name: "Spritz-Wine ${{ steps.extract_version.outputs.version }}"
           make_latest: true

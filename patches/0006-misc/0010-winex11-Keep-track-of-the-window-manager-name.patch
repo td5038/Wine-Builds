@@ -1,7 +1,7 @@
-From 66b71553b376f1613967043f1343ab722865e459 Mon Sep 17 00:00:00 2001
+From cca6adc8b19306c1ed784f1ea6f69a8c5885928b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Tue, 3 Dec 2024 09:58:18 +0100
-Subject: [PATCH 3/5] winex11: Keep track of the window manager name.
+Subject: [PATCH 10/12] winex11: Keep track of the window manager name.
 
 ---
  dlls/winex11.drv/event.c       | 14 +++++++++

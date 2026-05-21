@@ -1,7 +1,7 @@
-From fbf7912ae5983723a0621ffa950606920dd69407 Mon Sep 17 00:00:00 2001
+From 7383f5213dcc7ea87111a72403855ad6f26c2590 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 25 Aug 2025 23:25:25 +0200
-Subject: [PATCH 04/11] ntdll: Allow launching apps from steam.exe stub
+Subject: [PATCH 04/10] ntdll: Allow launching apps from steam.exe stub.
 
 Some games need to be launched from Proton's stub steam.exe to allow
 being launched on Linux and related systems: this allows doing so without

@@ -1,7 +1,7 @@
-From 0a7f90e78288f696a1c11640dd4cf2011378e3e0 Mon Sep 17 00:00:00 2001
+From e4a8da048e800f696e1ede8fe017f5b09c5465a2 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Tue, 4 Mar 2025 15:43:59 +0000
-Subject: [PATCH 5/5] winex11: add Muffin (Cinnamon) to Mutter detection
+Subject: [PATCH 12/12] winex11: Add Muffin (Cinnamon) to Mutter detection.
 
 Without this addition, every Mutter-specific workaround will fail to apply to Cinnamon's
 compositor Muffin, which is nothing but a Mutter fork.

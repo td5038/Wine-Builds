@@ -1,4 +1,4 @@
-From 2bf686a2a55cc840300a7b523318ec50023c5821 Mon Sep 17 00:00:00 2001
+From b3ec987f8db4d826f58c60aaaaa1687658efa449 Mon Sep 17 00:00:00 2001
 From: Joshua Ashton <joshua@froggi.es>
 Date: Thu, 16 Jul 2020 10:31:35 +0100
 Subject: [PATCH 6/8] comctl32: Don't use a dotty pen for treeview

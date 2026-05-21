@@ -1,8 +1,8 @@
-From b7a60a82a674bc19495d9cc27f8283dd78e01cb1 Mon Sep 17 00:00:00 2001
+From a2e6221a456aa1b6b5041a5ccfcb90f5d927034e Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Wed, 10 Sep 2025 01:12:08 +0200
-Subject: [PATCH 01/11] winediag: change logging and redirect to Spritz
- repository
+Subject: [PATCH 01/10] winediag: Change logging and redirect to Spritz
+ repository.
 
 ---
  dlls/ntdll/loader.c | 6 +++---

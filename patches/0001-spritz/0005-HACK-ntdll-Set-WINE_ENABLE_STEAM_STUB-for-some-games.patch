@@ -1,7 +1,7 @@
-From df91306d4845c642eac633d8c137e6d3e5656bec Mon Sep 17 00:00:00 2001
+From 9365f55c2bec33ad6b435aaee4badb6115161316 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Thu, 18 Sep 2025 11:50:52 +0200
-Subject: [PATCH 05/11] HACK: ntdll: Set WINE_ENABLE_STEAM_STUB for some games.
+Subject: [PATCH 05/10] HACK: ntdll: Set WINE_ENABLE_STEAM_STUB for some games.
 
 Based on Proton's hacks_init() function.
 ---

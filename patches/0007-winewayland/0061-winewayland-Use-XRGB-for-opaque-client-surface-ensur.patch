@@ -1,8 +1,8 @@
-From 9a98162b3edb943849dc47aed6aebdea7becf559 Mon Sep 17 00:00:00 2001
+From b853bf329b3826ce8d26aef27be3fb57c5a4440b Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 16 May 2026 17:11:29 -0500
-Subject: [PATCH 61/65] winewayland: Use XRGB for opaque client surface ensure
+Subject: [PATCH 61/70] winewayland: Use XRGB for opaque client surface ensure
  contents.
 
 (cherry picked from commit 4220c31df60680692f4aa48456b437d145e2807d)

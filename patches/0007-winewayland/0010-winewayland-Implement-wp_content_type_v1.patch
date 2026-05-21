@@ -1,8 +1,8 @@
-From ed4d7e73efe08d1f2b04f0d29dd491c95eda7725 Mon Sep 17 00:00:00 2001
+From 6e4b1ebec082e935491e1a49c696834bcea8b079 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 17 Apr 2026 20:35:31 -0500
-Subject: [PATCH 10/65] winewayland: Implement wp_content_type_v1.
+Subject: [PATCH 10/70] winewayland: Implement wp_content_type_v1.
 
 ---
  dlls/winewayland.drv/Makefile.in         |   1 +

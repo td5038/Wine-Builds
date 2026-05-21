@@ -1,0 +1,25 @@
+From db3d4a04e1fcf4fe82e2475a4e177b23f7777100 Mon Sep 17 00:00:00 2001
+From: Marc-Aurel Zent <mzent@codeweavers.com>
+Date: Tue, 21 Apr 2026 12:48:32 +0200
+Subject: [PATCH 2/3] ntdll: Increase number of futex queues to 1024.
+
+---
+ dlls/ntdll/sync.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/dlls/ntdll/sync.c b/dlls/ntdll/sync.c
+index 77845d34216..c49bd5bd1a4 100644
+--- a/dlls/ntdll/sync.c
++++ b/dlls/ntdll/sync.c
+@@ -835,7 +835,7 @@ struct futex_queue
+     LONG lock;
+ };
+ 
+-static struct futex_queue futex_queues[256];
++static struct futex_queue futex_queues[1024];
+ 
+ static struct futex_queue *get_futex_queue( const void *addr )
+ {
+-- 
+2.54.0
+

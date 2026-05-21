@@ -1,8 +1,8 @@
-From 35401d55cb335b4f27454d226938c2421bc69dee Mon Sep 17 00:00:00 2001
+From 4faee9320a6379c5a98de48c32252731bfff6074 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 15 Sep 2025 14:56:23 +0200
 Subject: [PATCH 1/7] wbemprox: Only return linked PnP devices in
- Win32_PnPEntity
+ Win32_PnPEntity.
 
 Based on https://github.com/ValveSoftware/wine/commit/299688c29f9a27f4c8850233e1980a2a304b26f0,
 rebased to work with the latest changes to wbemprox.

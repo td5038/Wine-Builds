@@ -1,8 +1,8 @@
-From 750c9136f53ad106c3e2c2e78b25fc6035d7a1d6 Mon Sep 17 00:00:00 2001
+From 1262ac8d753febe0c0907eca4916761f38477459 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 22 Apr 2026 18:59:27 -0500
-Subject: [PATCH 33/65] winewayland: Implement support for color mangement
+Subject: [PATCH 33/70] winewayland: Implement support for color mangement
  protocol.
 
 ---

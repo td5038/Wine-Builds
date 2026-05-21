@@ -1,0 +1,110 @@
+From c55c1e136c27cb413eed8a353ea922e09297cee8 Mon Sep 17 00:00:00 2001
+From: Ziqing Hui <zhui@codeweavers.com>
+Date: Tue, 5 May 2026 14:44:49 +0800
+Subject: [PATCH 2/3] win32u: Respect runtime font smoothing settings.
+
+---
+ dlls/win32u/font.c           | 15 ++++++++++++++-
+ dlls/win32u/sysparams.c      | 33 +++++++++++++++++++++++++++++++++
+ dlls/win32u/win32u_private.h |  1 +
+ 3 files changed, 48 insertions(+), 1 deletion(-)
+
+diff --git a/dlls/win32u/font.c b/dlls/win32u/font.c
+index eb589443ede..c27eac1a176 100644
+--- a/dlls/win32u/font.c
++++ b/dlls/win32u/font.c
+@@ -4521,6 +4521,8 @@ static HFONT font_SelectFont( PHYSDEV dev, HFONT hfont, UINT *aa_flags )
+         LOGFONTW lf;
+         FMAT2 dcmat;
+         BOOL can_use_bitmap = !!(NtGdiGetDeviceCaps( dc->hSelf, TEXTCAPS ) & TC_RA_ABLE);
++        UINT new_font_smoothing, new_subpixel_orientation;
++        BOOL update_font_smoothing;
+ 
+         NtGdiExtGetObjectW( hfont, sizeof(lf), &lf );
+         switch (lf.lfQuality)
+@@ -4570,17 +4572,28 @@ static HFONT font_SelectFont( PHYSDEV dev, HFONT hfont, UINT *aa_flags )
+         }
+         TRACE( "DC transform %f %f %f %f\n", dcmat.eM11, dcmat.eM12, dcmat.eM21, dcmat.eM22 );
+ 
++        update_font_smoothing = get_font_smoothing_aa( &new_font_smoothing,
++                                                       &new_subpixel_orientation );
++
+         pthread_mutex_lock( &font_lock );
++        if (update_font_smoothing)
++        {
++            font_smoothing = new_font_smoothing;
++            subpixel_orientation = new_subpixel_orientation;
++        }
+ 
+         font = select_font( &lf, dcmat, can_use_bitmap );
+ 
+         if (font)
+         {
+-            if (!*aa_flags) *aa_flags = font->aa_flags;
+             if (!*aa_flags)
+             {
+                 if (lf.lfQuality == CLEARTYPE_QUALITY || lf.lfQuality == CLEARTYPE_NATURAL_QUALITY)
+                     *aa_flags = subpixel_orientation;
++                else if (font_smoothing == GGO_BITMAP)
++                    *aa_flags = GGO_BITMAP;
++                else if (font->aa_flags)
++                    *aa_flags = font->aa_flags;
+                 else
+                     *aa_flags = font_smoothing;
+             }
+diff --git a/dlls/win32u/sysparams.c b/dlls/win32u/sysparams.c
+index 8043dcb0221..239b5600a80 100644
+--- a/dlls/win32u/sysparams.c
++++ b/dlls/win32u/sysparams.c
+@@ -8090,3 +8090,36 @@ BOOL get_gpu_info_from_uuid( const GUID *uuid, LUID *luid, UINT32 *node_mask, ch
+     unlock_display_devices();
+     return found;
+ }
++
++BOOL get_font_smoothing_aa( UINT *font_aa, UINT *subpixel_orientation_aa )
++{
++    DWORD type, orientation;
++    UINT smoothing;
++
++    if (!volatile_base_key
++            || !get_entry( &entry_FONTSMOOTHING, 0, &smoothing )
++            || !get_entry( &entry_FONTSMOOTHINGTYPE, 0, &type )
++            || !get_entry( &entry_FONTSMOOTHINGORIENTATION, 0, &orientation ))
++        return FALSE;
++
++    switch (orientation)
++    {
++    case FE_FONTSMOOTHINGORIENTATIONBGR:
++        *subpixel_orientation_aa = WINE_GGO_HBGR_BITMAP;
++        break;
++    case FE_FONTSMOOTHINGORIENTATIONRGB:
++        *subpixel_orientation_aa = WINE_GGO_HRGB_BITMAP;
++        break;
++    default:
++        return FALSE;
++    }
++
++    if (!smoothing)
++        *font_aa = GGO_BITMAP;
++    else if (type == FE_FONTSMOOTHINGCLEARTYPE)
++        *font_aa = *subpixel_orientation_aa;
++    else
++        *font_aa = GGO_GRAY4_BITMAP;
++
++    return TRUE;
++}
+diff --git a/dlls/win32u/win32u_private.h b/dlls/win32u/win32u_private.h
+index 031e1afec70..eec6b755f8b 100644
+--- a/dlls/win32u/win32u_private.h
++++ b/dlls/win32u/win32u_private.h
+@@ -169,6 +169,7 @@ extern COLORREF get_sys_color( int index );
+ extern HBRUSH get_sys_color_brush( unsigned int index );
+ extern HPEN get_sys_color_pen( unsigned int index );
+ extern UINT get_system_dpi(void);
++extern BOOL get_font_smoothing_aa( UINT *font_aa, UINT *subpixel_orientation_aa );
+ extern int get_system_metrics( int index );
+ extern UINT get_thread_dpi(void);
+ extern UINT set_thread_dpi_awareness_context( UINT context );
+-- 
+2.54.0
+

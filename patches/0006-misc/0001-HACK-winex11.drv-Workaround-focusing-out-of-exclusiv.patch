@@ -1,7 +1,7 @@
-From f39f7a64724e9fbbcae0f9af500a307c047da15a Mon Sep 17 00:00:00 2001
+From ff0de4520d2dae35705e7f6c9eb6e597b3ae40fc Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Wed, 14 Dec 2022 21:21:50 +0100
-Subject: [PATCH 2/5] HACK: winex11.drv: Workaround focusing out of exclusive
+Subject: [PATCH 01/12] HACK: winex11.drv: Workaround focusing out of exclusive
  fullscreen windows.
 
 This retargets some old window manager workarounds which don't seem to

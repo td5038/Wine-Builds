@@ -1,7 +1,7 @@
-From f09b12943105e45394de0414ddc6d3d468f78c75 Mon Sep 17 00:00:00 2001
+From fcdad725f30eaf76cf835ecb9777f49b36e522e9 Mon Sep 17 00:00:00 2001
 From: teapot4195 <teapot4195@gmail.com>
 Date: Sun, 17 May 2026 01:51:39 -0400
-Subject: [PATCH 11/11] crypt32: Don't sort items when updating attributes for
+Subject: [PATCH 10/10] crypt32: Don't sort items when updating attributes for
  verification.
 
 It appears that authenticated attributes are used in wire order

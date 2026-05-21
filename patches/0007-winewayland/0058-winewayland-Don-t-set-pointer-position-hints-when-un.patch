@@ -1,8 +1,8 @@
-From 00e461c97b92f0c7301d8af17443ffd72d13b7b8 Mon Sep 17 00:00:00 2001
+From f1bf9168e33dfc8a8c4d1d70493be22f90d41d67 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Tue, 5 May 2026 05:42:14 -0500
-Subject: [PATCH 58/65] winewayland: Don't set pointer position hints when
+Subject: [PATCH 58/70] winewayland: Don't set pointer position hints when
  unnecessary.
 
 (cherry picked from commit cc4d66624dce089a326a190eb58c06d2f26db853)

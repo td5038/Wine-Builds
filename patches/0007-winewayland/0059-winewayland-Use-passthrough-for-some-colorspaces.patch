@@ -1,8 +1,8 @@
-From f79945dcc904ac324b6c45ab4e49f028cf9aed88 Mon Sep 17 00:00:00 2001
+From 0d6f85d0fad13cdf736222b9a08bd99dea870506 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 29 Apr 2026 22:12:11 -0500
-Subject: [PATCH 59/65] winewayland: Use passthrough for some colorspaces.
+Subject: [PATCH 59/70] winewayland: Use passthrough for some colorspaces.
 
 Required for HDR to look correct on wayland since Windows works in a different way compared to wayland.
 

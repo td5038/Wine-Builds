@@ -1,8 +1,8 @@
-From 91f112409055d498247c09255d0107aba5388d75 Mon Sep 17 00:00:00 2001
+From 2b77cb7751f0d320f256da4585b33938de356b60 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Thu, 27 Nov 2025 16:38:54 -0600
-Subject: [PATCH 36/65] server: Store keyboard layout in thread struct.
+Subject: [PATCH 36/70] server: Store keyboard layout in thread struct.
 
 ---
  server/protocol.def | 12 ++++++++++++

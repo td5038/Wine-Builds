@@ -1,8 +1,8 @@
-From 00f222eec333b65059bb49ba4a60c2dc677d4546 Mon Sep 17 00:00:00 2001
+From 6cac2771fdfac1732235467509d5f077224bcc02 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Wed, 1 Oct 2025 12:52:35 -0500
-Subject: [PATCH 41/65] winewayland: Generate KBDTABLES dead key tables.
+Subject: [PATCH 41/70] winewayland: Generate KBDTABLES dead key tables.
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -15,7 +15,7 @@ Co-Authored-By: Rémi Bernon <rbernon@codeweavers.com>
  3 files changed, 187 insertions(+), 8 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 4dfb34274d0..cc60afea70d 100644
+index 781a10da3fc..a83b5d7b2d7 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -1456,7 +1456,8 @@ then

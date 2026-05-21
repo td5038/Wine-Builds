@@ -1,8 +1,8 @@
-From 85e99c19333209dbf417bb18b6905971c2fc45e3 Mon Sep 17 00:00:00 2001
+From 8c25a13e49e3b5f536722f2e431c5b135ef788fd Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 24 Apr 2026 22:12:30 -0500
-Subject: [PATCH 45/65] winewayland: Implement monitor ranking to determine
+Subject: [PATCH 45/70] winewayland: Implement monitor ranking to determine
  primary.
 
 ---

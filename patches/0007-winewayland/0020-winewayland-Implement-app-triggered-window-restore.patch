@@ -1,8 +1,8 @@
-From e2037767b96862f3ddbce47ffa10a327c044a04b Mon Sep 17 00:00:00 2001
+From bef2ae1598325c14f1a3b5c8331ff84f94fd794e Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Fri, 10 Apr 2026 00:14:01 -0500
-Subject: [PATCH 20/65] winewayland: Implement app triggered window restore.
+Subject: [PATCH 20/70] winewayland: Implement app triggered window restore.
 
 ---
  dlls/winewayland.drv/window.c | 15 +++++++++++++++

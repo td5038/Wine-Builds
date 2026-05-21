@@ -1,4 +1,4 @@
-From 6400c22b2dafc880759309bc37e5f16bbd20f201 Mon Sep 17 00:00:00 2001
+From a2ea55501c6b54503c85e665398e67c8e9419613 Mon Sep 17 00:00:00 2001
 From: Paul Gofman <pgofman@codeweavers.com>
 Date: Thu, 27 Apr 2023 17:32:38 -0600
 Subject: [PATCH 2/6] fsync: Add WINE_FSYNC_YIELD_TO_WAITERS option.

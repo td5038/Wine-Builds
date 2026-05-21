@@ -1,8 +1,8 @@
-From d36580cc2f71968d1ef90b7df53380c9a6a45af4 Mon Sep 17 00:00:00 2001
+From f399c740b9eea9547f57385aeee2cc008dd747eb Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 16 May 2026 17:05:56 -0500
-Subject: [PATCH 64/65] win32u/vulkan: Include alpha bits in vulkan surface
+Subject: [PATCH 64/70] win32u/vulkan: Include alpha bits in vulkan surface
  configure.
 
 ---

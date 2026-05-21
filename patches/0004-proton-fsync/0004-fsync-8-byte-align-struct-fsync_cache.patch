@@ -1,4 +1,4 @@
-From 410cfbecf7cd1c1e57c299169ca1cd445889abdb Mon Sep 17 00:00:00 2001
+From 89a722cea2d346eacfbd7ff17d5437071e559df2 Mon Sep 17 00:00:00 2001
 From: Paul Gofman <pgofman@codeweavers.com>
 Date: Sun, 12 Apr 2026 13:42:46 -0600
 Subject: [PATCH 4/6] fsync: 8-byte align 'struct fsync_cache'.

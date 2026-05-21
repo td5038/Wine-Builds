@@ -1,8 +1,8 @@
-From eacc59853aac8ac63082dee596684d4e30a69ac5 Mon Sep 17 00:00:00 2001
+From 21300a0b470b6a32eb51bcf0514a220dc193e6b9 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 18 Apr 2026 23:06:36 -0500
-Subject: [PATCH 22/65] winewayland: Avoid constantly reconfiguring the client
+Subject: [PATCH 22/70] winewayland: Avoid constantly reconfiguring the client
  surface.
 
 ---

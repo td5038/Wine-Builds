@@ -1,4 +1,4 @@
-From 9208c896b18fdfe2952d1f76dda24525e92521e9 Mon Sep 17 00:00:00 2001
+From 3863fb7bbbc13cdc68ad27c0d564837c8146d8f0 Mon Sep 17 00:00:00 2001
 From: Paul Gofman <pgofman@codeweavers.com>
 Date: Tue, 15 Feb 2022 17:20:40 +0300
 Subject: [PATCH 1/6] fsync: Add WINE_FSYNC_SIMULATE_SCHED_QUANTUM config

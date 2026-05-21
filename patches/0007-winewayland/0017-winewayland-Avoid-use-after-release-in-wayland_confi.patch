@@ -1,8 +1,8 @@
-From 7226d2b3650651a804cee3882d2fa9041bb90495 Mon Sep 17 00:00:00 2001
+From 15930d9d847e86e5e960f89a04990840b13bb0da Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 28 Mar 2026 22:27:05 -0500
-Subject: [PATCH 17/65] winewayland: Avoid use after release in
+Subject: [PATCH 17/70] winewayland: Avoid use after release in
  wayland_configure_window.
 
 Big thanks to Cwooper: https://github.com/Etaash-mathamsetty/wine-valve/pull/1 for finding this bug!

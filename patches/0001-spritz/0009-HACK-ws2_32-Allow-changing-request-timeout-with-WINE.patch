@@ -1,7 +1,7 @@
-From d3fa118e6baffdadb85eb73ab406b5c5700a8bc0 Mon Sep 17 00:00:00 2001
+From 80e5788132ad9333da05158df03f34993628bd04 Mon Sep 17 00:00:00 2001
 From: teapot4195 <teapot4195@gmail.com>
 Date: Wed, 15 Apr 2026 22:19:21 +0200
-Subject: [PATCH 09/11] HACK: ws2_32: Allow changing request timeout with
+Subject: [PATCH 09/10] HACK: ws2_32: Allow changing request timeout with
  WINE_ENABLE_TIMEOUT_FIX=1.
 
 Co-authored-by: NelloKudo <marshnelloosu@gmail.com>

@@ -1,7 +1,7 @@
-From bb64a298110724cd013916174291a0ffdfa2b871 Mon Sep 17 00:00:00 2001
+From b50f85b5cb104c540756891cd18d8f6b8ee52327 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 15 Sep 2025 15:44:20 +0200
-Subject: [PATCH 2/7] winebus: allow overriding hidraw/input with
+Subject: [PATCH 2/7] winebus: Allow overriding hidraw/input with
  PROTON_DISABLE_HIDRAW etc.
 
 Attempt at providing the same behavior as Proton where both PROTON_DISABLE_HIDRAW

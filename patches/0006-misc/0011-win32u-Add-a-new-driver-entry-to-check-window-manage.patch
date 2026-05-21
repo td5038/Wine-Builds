@@ -1,7 +1,7 @@
-From 9064148042cb2be68a974202e53c270e0af71536 Mon Sep 17 00:00:00 2001
+From cc9ad04b85308fd2eda2513d414875fd2264852c Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Tue, 3 Dec 2024 12:46:56 +0100
-Subject: [PATCH 4/5] win32u: Add a new driver entry to check window manager
+Subject: [PATCH 11/12] win32u: Add a new driver entry to check window manager
  name.
 
 ---

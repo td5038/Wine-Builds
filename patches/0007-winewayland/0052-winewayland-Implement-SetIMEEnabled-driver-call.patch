@@ -1,7 +1,7 @@
-From 2a218f4fdca9f7888221862ff1e9b28917568fe6 Mon Sep 17 00:00:00 2001
+From 1b1e3e74cc0fba84a087ebaeab02b43f0cd761f1 Mon Sep 17 00:00:00 2001
 From: Ziia Shi <mkrsym1@gmail.com>
 Date: Sun, 1 Feb 2026 01:56:27 +0100
-Subject: [PATCH 52/65] winewayland: Implement SetIMEEnabled driver call.
+Subject: [PATCH 52/70] winewayland: Implement SetIMEEnabled driver call.
 
 ---
  dlls/winewayland.drv/wayland_text_input.c | 95 ++++++++++++++++++++---

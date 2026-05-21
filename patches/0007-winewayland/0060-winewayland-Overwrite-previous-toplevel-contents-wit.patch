@@ -1,8 +1,8 @@
-From 43be7295b66c3e4fc83654299e04e5a6aa22eefb Mon Sep 17 00:00:00 2001
+From 76c4ee40e500031acd47bff02c0a44e25d46dd02 Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 16 May 2026 16:51:17 -0500
-Subject: [PATCH 60/65] winewayland: Overwrite previous toplevel contents with
+Subject: [PATCH 60/70] winewayland: Overwrite previous toplevel contents with
  ensure contents.
 
 In the future when we need to sync the toplevel and client surface contents, we only will sync those when the app tries to draw to the toplevel which will lead to client surface detach followed by a copy.

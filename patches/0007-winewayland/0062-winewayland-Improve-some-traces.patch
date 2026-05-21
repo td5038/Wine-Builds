@@ -1,8 +1,8 @@
-From ee8fcc75a69377a2ec5aae02fe1dac9ad29ad071 Mon Sep 17 00:00:00 2001
+From 85232e742de9bf75469b20be55ef27dda8cf550f Mon Sep 17 00:00:00 2001
 From: Etaash Mathamsetty
  <45927311+Etaash-mathamsetty@users.noreply.github.com>
 Date: Sat, 16 May 2026 22:19:45 -0500
-Subject: [PATCH 62/65] winewayland: Improve some traces.
+Subject: [PATCH 62/70] winewayland: Improve some traces.
 
 (cherry picked from commit bf6d3cc49dcbcbfa003c59e4cb458f2443150589)
 ---

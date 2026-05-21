@@ -1,7 +1,7 @@
-From 26d557d4fe010effa846e97ebf35dc523d65f389 Mon Sep 17 00:00:00 2001
+From 430b28893bd3809c043fc4f3eb88a8208d757f68 Mon Sep 17 00:00:00 2001
 From: NelloKudo <marshnelloosu@gmail.com>
 Date: Mon, 15 Sep 2025 17:07:35 +0200
-Subject: [PATCH 3/7] winebus: disable Hidraw by default, add log message
+Subject: [PATCH 3/7] winebus: Disable Hidraw by default, add log message.
 
 Disabling Hidraw is needed for most controllers to work without issues: using it though, breaks
 PlayStation glyphs for games with native dualsense support. Hence, notify the user about it

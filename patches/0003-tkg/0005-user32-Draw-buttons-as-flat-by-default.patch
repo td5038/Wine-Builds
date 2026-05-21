@@ -1,4 +1,4 @@
-From 993cdeb5189b6d3a92ec3798f418d3b317766978 Mon Sep 17 00:00:00 2001
+From d6dd87ac08780d07ffa9f487d0c8c2f564cb70bc Mon Sep 17 00:00:00 2001
 From: Joshua Ashton <joshua@froggi.es>
 Date: Thu, 16 Jul 2020 10:18:31 +0100
 Subject: [PATCH 5/8] user32: Draw buttons as flat by default
